@@ -4,6 +4,11 @@ html{
     align-items: center;
     height: 100vh;
 }
+#gridOuter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #grid{
     display: flex;
     flex-wrap: wrap;
@@ -49,6 +54,6 @@ background-color:rgb(148, 130, 130);
 }
 
 .frontImg{
-    width: 60px;
-    height: 50px;
+    width: 66.66px;
+    height: 75px;
 }

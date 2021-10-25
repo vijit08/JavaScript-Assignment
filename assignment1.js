@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < imgArray.length; i++) {
             var card = document.createElement('img');
 
-            card.setAttribute('src', 'image/OIP.jpg');
+            card.setAttribute('src', 'image/test.png');
             // card.setAttribute('class' , frontImg);
             card.className = "frontImg";
             card.setAttribute('data-id', i);
@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const optionTwoId = cardsChosenId[1];
 
         if (optionOneId == optionTwoId) {
-            cards[optionOneId].setAttribute('src', 'image/OIP.jpg');
-            cards[optionTwoId].setAttribute('src', 'image/OIP.jpg');
+            cards[optionOneId].setAttribute('src', 'image/test.png');
+            cards[optionTwoId].setAttribute('src', 'image/test.png');
 
         }
         else if (cardsChosen[0] === cardsChosen[1]) {
@@ -143,8 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cards[optionTwoId].removeEventListener('click', flipCard);
             cardsWon.push(cardsChosen);
         } else {
-            cards[optionOneId].setAttribute('src', 'image/OIP.jpg');
-            cards[optionTwoId].setAttribute('src', 'image/OIP.jpg');
+            cards[optionOneId].setAttribute('src', 'image/test.png');
+            cards[optionTwoId].setAttribute('src', 'image/test.png');
 
         }
         cardsChosen = [];
