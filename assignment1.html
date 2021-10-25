@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="assignment1.css">
+  <script src="assignment1.js"></script>
+</head>
+
+<body>
+  <div id="game">
+    <h3>Score:<span id="result"></span></h3>
+    <input type="number" value="60" max="60" min="0" id="timer" data-target="60" />
+    <div id="grid">
+    </div>
+    <div id="bottom"> 
+      <div id="left">
+        <div class="series">
+          <input type="radio" id="series2" name="series" value="series2" checked>
+          <label for="series2">series of 2 pics</label>
+        </div>
+
+        <div class="series">
+          <input type="radio" id="series3" name="series" value="series3">
+          <label for="series3">series of 3 pics</label>
+        </div>
+
+        <div class="series">
+          <input type="radio" id="series4" name="series" value="series4">
+          <label for="series4">series of 3 pics</label>
+        </div>
+
+      </div>
+      <div id="right">
+        <button type="reset" value="Reset" id="newGame" onclick="countDown()">NEW GAME</button>
+        <button id="show">SHOW</button>
+        <button id="help" onclick="help()">HELP</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
