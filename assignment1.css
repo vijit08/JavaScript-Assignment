@@ -1,16 +1,15 @@
-html{
-    display: flex;
+html , #gridOuter {
     justify-content: center;
     align-items: center;
+}
+
+html{
     height: 100vh;
 }
-#gridOuter{
+html , #gridOuter , #grid , #bottom {
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 #grid{
-    display: flex;
     flex-wrap: wrap;
     height: 300px;
     width: 400px;
@@ -32,16 +31,15 @@ html{
     text-align: center;
     width: 200px;
 }
-input {
+#timer {
     margin: .4rem;
 }
 
 #bottom{
-    display: flex;
     justify-content: space-around;
     padding: 10px;
 }
-button {
+.btn {
     cursor: pointer;
     display: block;
     border: 1px solid gray;
@@ -54,6 +52,6 @@ background-color:rgb(148, 130, 130);
 }
 
 .frontImg{
-    width: 66.66px;
-    height: 75px;
+    width: 62.5px;
+    border: 1px solid gray;
 }

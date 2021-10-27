@@ -12,13 +12,13 @@
 
 <body>
   <div id="game">
-    <h3>Score:<span id="result"></span></h3>
+    <h3>Score:<span id="result">0</span></h3>
     <input type="number" value="60" max="60" min="0" id="timer" data-target="60" />
     <div id="gridOuter">
-    <div id="grid">
+      <div id="grid">
+      </div>
     </div>
-  </div>
-    <div id="bottom"> 
+    <div id="bottom">
       <div id="left">
         <div class="series">
           <input type="radio" id="series2" name="series" value="series2" checked>
@@ -32,14 +32,14 @@
 
         <div class="series">
           <input type="radio" id="series4" name="series" value="series4">
-          <label for="series4">series of 3 pics</label>
+          <label for="series4">series of 4 pics</label>
         </div>
 
       </div>
       <div id="right">
-        <button type="reset" value="Reset" id="newGame" onclick="countDown()">NEW GAME</button>
-        <button id="show">SHOW</button>
-        <button id="help" onclick="help()">HELP</button>
+        <button type="reset" value="Reset" id="newGame" class="btn" onclick="newGame ()">NEW GAME</button>
+        <button type="button" id="show" class="btn">SHOW</button>
+        <button id="help" type="button" class="btn" onclick="help()">HELP</button>
       </div>
     </div>
   </div>

@@ -1,19 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // image option
-    const imgArray = [
+    let imgArray = [
         {
             name: "insta",
             img: "image/insta.png"
         },
-        {
-            name: "insta",
-            img: "image/insta.png"
-        },
-        {
-            name: "twit",
-            img: "image/twit.png"
-        },
+
         {
             name: "twit",
             img: "image/twit.png"
@@ -22,14 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "twitter",
             img: "image/twitter.png"
         },
-        {
-            name: "twitter",
-            img: "image/twitter.png"
-        },
-        {
-            name: "fb",
-            img: "image/fb.png"
-        },
+
         {
             name: "fb",
             img: "image/fb.png"
@@ -38,14 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "g+",
             img: "image/g+.png"
         },
-        {
-            name: "g+",
-            img: "image/g+.png"
-        },
-        {
-            name: "youtube",
-            img: "image/youtube.png"
-        },
+
         {
             name: "youtube",
             img: "image/youtube.png"
@@ -54,14 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "li",
             img: "image/li.png"
         },
-        {
-            name: "li",
-            img: "image/li.png"
-        },
-        {
-            name: "mail",
-            img: "image/mail.png"
-        },
+
         {
             name: "mail",
             img: "image/mail.png"
@@ -70,14 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "whatsapp",
             img: "image/whatsapp.png"
         },
-        {
-            name: "whatsapp",
-            img: "image/whatsapp.png"
-        },
-        {
-            name: "snapchat",
-            img: "image/snapchat.png"
-        },
+
         {
             name: "snapchat",
             img: "image/snapchat.png"
@@ -86,24 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "tick",
             img: "image/tick.png"
         },
-        {
-            name: "tick",
-            img: "image/tick.png"
-        },
-        {
-            name: "map",
-            img: "image/map.png"
-        },
+
         {
             name: "map",
             img: "image/map.png"
         }
     ]
 
-    imgArray.sort(() => 0.5 - Math.random());
+    let duplicateImg = [...imgArray, ...imgArray];
+
+    shuffleCard = () => {
+        duplicateImg.sort(() => 0.5 - Math.random());
+
+    }
 
     const grid = document.querySelector('#grid');
-    const resultDisplay = document.querySelector('#result');
+    let resultDisplay = document.querySelector('#result');
     let cardsChosen = [];
     let cardsChosenId = [];
     let cardsWon = [];
@@ -112,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createGrid() {
         grid.innerHTML = "";
 
-        for (let i = 0; i < imgArray.length; i++) {
+        for (let i = 0; i < 24; i++) {
             var card = document.createElement('img');
 
             card.setAttribute('src', 'image/test.png');
@@ -149,9 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         cardsChosen = [];
         cardsChosenId = [];
-        resultDisplay.textContent = cardsWon.length;
-        if (cardsWon.length === imgArray.length / 2) {
-            resultDisplay.textContent = 'Congratulations! You found them all!';
+        resultDisplay.innerHTML = cardsWon.length;
+        if (cardsWon.length === duplicateImg.length / 2) {
+            resultDisplay.innerHTML = 'Congratulations! You found them all!';
         }
     }
 
@@ -159,44 +122,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function flipCard() {
         let imgId = this.getAttribute('data-id');
-        cardsChosen.push(imgArray[imgId].name);
+        cardsChosen.push(duplicateImg[imgId].name);
         cardsChosenId.push(imgId);
-        this.setAttribute('src', imgArray[imgId].img);
+        this.setAttribute('src', duplicateImg[imgId].img);
         if (cardsChosen.length === 2) {
             setTimeout(checkForMatch, 500)
         }
     }
 
-
-    countDown = document.querySelector('#newGame');
-
-    countDown = () => {
-
+    function flipAllCard() {
         const imageElements = document.getElementsByClassName('frontImg');
-        // console.log(imageElements);
+        Array.from(imageElements).forEach((ele, index) => {
+            ele.setAttribute('src', duplicateImg[index].img);
+        })
+        // setTimeout(() => {
+        //     Array.from(imageElements).forEach((ele) => {
+        //         ele.setAttribute('src', 'image/test.png');
+        //     })
+        // });
+    }
+
+
+
+    newGame = document.querySelector('#newGame');
+    var interval;
+
+    newGame = () => {
+        createGrid();
+        shuffleCard();
+        resultDisplay.innerHTML = "0";
+        cardsWon = [];
+        const imageElements = document.getElementsByClassName('frontImg');
         Array.from(imageElements).forEach((ele) => {
             ele.addEventListener('click', flipCard);
 
         })
 
+
         var second = 60;
         var timer = document.querySelector("#timer");
-        var interval;
         function startTimer() {
+            clearInterval(interval);
             interval = setInterval(function () {
                 timer.value = second--;
                 if (second < 0) {
                     clearInterval(interval);
                     alert('Game Over');
+                    const showBtn = document.querySelector('#show');
+                    showBtn.addEventListener('click', () => {
+                        flipAllCard();
+                    })
                     createGrid();
                     timer.value = 60;
-                    resultDisplay.innerHTML="";
-
                 }
             }, 1000)
         };
         startTimer()
     }
+
+    // let refreshPage = () => {
+    //     shuffleCard();
+    //     resultDisplay.innerHTML=""
+    // }
+
 
 
     //   var showBtn = document.getElementById('show');
@@ -204,12 +192,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // document.getElementsByClassName("frontImg").classList.add("hideImg");
     //   })
     createGrid();
-    startTimer();
+    // startTimer();
 
 
 })
 
 function help() {
-    alert("Onclick of HELP button, an alert should come with the instructions of the game")
+    alert("* Click to Start New Game \n* Select The series of the Game\n* Match the Image \n* Click the Show button for showing the image\n* You have only 60 second to complete the game")
 }
 
