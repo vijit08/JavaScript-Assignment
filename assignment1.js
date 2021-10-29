@@ -287,7 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let timer = document.querySelector("#timer");
         function startTimer() {
             clearInterval(interval);
-            showButton();
             interval = setInterval(function () {
                 timer.value = second--;
                 if (second < 0) {
@@ -297,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     showButton();
                     timer.value = 60;
                 }
-            }, 1000)
+            }, 100)
         };
         startTimer()
     }
