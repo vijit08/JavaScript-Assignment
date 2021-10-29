@@ -53,5 +53,6 @@ background-color:rgb(148, 130, 130);
 
 .frontImg{
     width: 62.5px;
-    border: 1px solid gray;
+    border: 1.5px solid black;
+    border-radius: 5px;
 }

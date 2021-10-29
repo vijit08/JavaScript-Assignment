@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const seriesOfTwo = document.querySelector("#series2");
+    const seriesOfThree = document.querySelector("#series3");
+    const seriesOfFour = document.querySelector("#series4");
     // image option
     let imgArray = [
         {
@@ -58,7 +61,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ]
 
-    let duplicateImg = [...imgArray, ...imgArray];
+    checkedSeriesTwo = () => {
+        seriesOfTwo.checked= true;
+        // seriesOfThree.disabled = true;
+        // seriesOfFour.disabled = true;
+
+    }
+
+    checkedSeriesThree = () => {
+        seriesOfThree.checked= true;
+        // seriesOfTwo.disabled = true;
+        // seriesOfFour.disabled = true;
+    }
+
+    checkedSeriesFour = () => {
+        seriesOfFour.checked= true;
+        // seriesOfTwo.disabled = true;
+        // seriesOfThree.disabled = true;
+    }
+
+
+    let duplicateImg;
+    function checkSeries() {
+        if (seriesOfTwo.checked) {
+            duplicateImg = [...imgArray, ...imgArray];
+        }
+        else if (seriesOfThree.checked) {
+            let img = imgArray.slice(0, 8);
+            duplicateImg = [...img, ...img, ...img];
+        }
+        else if (seriesOfFour.checked) {
+            let img = imgArray.slice(0, 6);
+            duplicateImg = [...img, ...img, ...img, ...img];
+        }
+    }
+
 
     shuffleCard = () => {
         duplicateImg.sort(() => 0.5 - Math.random());
@@ -118,6 +155,80 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function checkForMatch3() {
+        const cards = document.querySelectorAll('img');
+        const optionOneId = cardsChosenId[0];
+        const optionTwoId = cardsChosenId[1];
+        const optionThreeId = cardsChosenId[2];
+
+
+        if (optionOneId == optionTwoId && optionTwoId == optionThreeId) {
+            cards[optionOneId].setAttribute('src', 'image/test.png');
+            cards[optionTwoId].setAttribute('src', 'image/test.png');
+            cards[optionThreeId].setAttribute('src', 'image/test.png');
+
+
+        }
+        else if (cardsChosen[0] === cardsChosen[1] && cardsChosen[1] === cardsChosen[2]) {
+
+            cards[optionOneId].removeEventListener('click', flipCard);
+            cards[optionTwoId].removeEventListener('click', flipCard);
+            cards[optionThreeId].removeEventListener('click', flipCard);
+
+            cardsWon.push(cardsChosen);
+        } else {
+            cards[optionOneId].setAttribute('src', 'image/test.png');
+            cards[optionTwoId].setAttribute('src', 'image/test.png');
+            cards[optionThreeId].setAttribute('src', 'image/test.png');
+
+
+        }
+        cardsChosen = [];
+        cardsChosenId = [];
+        resultDisplay.innerHTML = cardsWon.length;
+        if (cardsWon.length === duplicateImg.length / 3) {
+            resultDisplay.innerHTML = 'Congratulations! You found them all!';
+        }
+    }
+
+    function checkForMatch4() {
+        const cards = document.querySelectorAll('img');
+        const optionOneId = cardsChosenId[0];
+        const optionTwoId = cardsChosenId[1];
+        const optionThreeId = cardsChosenId[2];
+        const optionFourId = cardsChosenId[3];
+
+        if (optionOneId == optionTwoId && optionTwoId == optionThreeId && optionThreeId == optionFourId) {
+            cards[optionOneId].setAttribute('src', 'image/test.png');
+            cards[optionTwoId].setAttribute('src', 'image/test.png');
+            cards[optionOneId].setAttribute('src', 'image/test.png');
+            cards[optionTwoId].setAttribute('src', 'image/test.png');
+
+        }
+       else if ((cardsChosen[0] === cardsChosen[1]) && (cardsChosen[1] === cardsChosen[2]) && (cardsChosen[2] === cardsChosen[3])) {
+
+            //   cards[optionOneId].setAttribute('src', 'image/OIP.jpg');
+            //   cards[optionTwoId].setAttribute('src', 'image/OIP.jpg');
+            cards[optionOneId].removeEventListener('click', flipCard);
+            cards[optionTwoId].removeEventListener('click', flipCard);
+            cards[optionThreeId].removeEventListener('click', flipCard);
+            cards[optionFourId].removeEventListener('click', flipCard);
+            cardsWon.push(cardsChosen);
+        } else {
+            cards[optionOneId].setAttribute('src', 'image/test.png');
+            cards[optionTwoId].setAttribute('src', 'image/test.png');
+            cards[optionThreeId].setAttribute('src', 'image/test.png');
+            cards[optionFourId].setAttribute('src', 'image/test.png');
+
+        }
+        cardsChosen = [];
+        cardsChosenId = [];
+        resultDisplay.innerHTML = cardsWon.length;
+        if (cardsWon.length === duplicateImg.length / 4) {
+            resultDisplay.innerHTML = 'Congratulations! You found them all!';
+        }
+    }
+
     //flip the card  
 
     function flipCard() {
@@ -125,29 +236,34 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsChosen.push(duplicateImg[imgId].name);
         cardsChosenId.push(imgId);
         this.setAttribute('src', duplicateImg[imgId].img);
-        if (cardsChosen.length === 2) {
+        if (cardsChosen.length === 2 && seriesOfTwo.checked) {
             setTimeout(checkForMatch, 500)
+            return 
+        }
+        if (cardsChosen.length === 3 && seriesOfThree.checked) {
+            setTimeout(checkForMatch3, 800)
+            return
+        }
+        if (cardsChosen.length === 4 && seriesOfFour.checked) {
+            setTimeout(checkForMatch4, 1000)
+            return
         }
     }
+
+
 
     function flipAllCard() {
         const imageElements = document.getElementsByClassName('frontImg');
         Array.from(imageElements).forEach((ele, index) => {
             ele.setAttribute('src', duplicateImg[index].img);
         })
-        // setTimeout(() => {
-        //     Array.from(imageElements).forEach((ele) => {
-        //         ele.setAttribute('src', 'image/test.png');
-        //     })
-        // });
     }
 
-
-
     newGame = document.querySelector('#newGame');
-    var interval;
+    let interval;
 
     newGame = () => {
+        checkSeries();
         createGrid();
         shuffleCard();
         resultDisplay.innerHTML = "0";
@@ -157,42 +273,35 @@ document.addEventListener('DOMContentLoaded', () => {
             ele.addEventListener('click', flipCard);
 
         })
+  
 
+        showButton = () => {
+            const showBtn = document.querySelector('#show');
+            showBtn.addEventListener('click', () => {
+                flipAllCard();
+                clearInterval(interval);
+            })
+        }
 
-        var second = 60;
-        var timer = document.querySelector("#timer");
+        let second = 60;
+        let timer = document.querySelector("#timer");
         function startTimer() {
             clearInterval(interval);
+            showButton();
             interval = setInterval(function () {
                 timer.value = second--;
                 if (second < 0) {
                     clearInterval(interval);
                     alert('Game Over');
-                    const showBtn = document.querySelector('#show');
-                    showBtn.addEventListener('click', () => {
-                        flipAllCard();
-                    })
-                    createGrid();
+                    flipAllCard();
+                    showButton();
                     timer.value = 60;
                 }
             }, 1000)
         };
         startTimer()
     }
-
-    // let refreshPage = () => {
-    //     shuffleCard();
-    //     resultDisplay.innerHTML=""
-    // }
-
-
-
-    //   var showBtn = document.getElementById('show');
-    //   showBtn.addEventListener('click', function(){
-    // document.getElementsByClassName("frontImg").classList.add("hideImg");
-    //   })
     createGrid();
-    // startTimer();
 
 
 })
