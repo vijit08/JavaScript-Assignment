@@ -62,22 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
 
     checkedSeriesTwo = () => {
-        seriesOfTwo.checked= true;
-        // seriesOfThree.disabled = true;
-        // seriesOfFour.disabled = true;
-
+        seriesOfTwo.checked = true;
     }
 
     checkedSeriesThree = () => {
-        seriesOfThree.checked= true;
-        // seriesOfTwo.disabled = true;
-        // seriesOfFour.disabled = true;
+        seriesOfThree.checked = true;
     }
 
     checkedSeriesFour = () => {
-        seriesOfFour.checked= true;
-        // seriesOfTwo.disabled = true;
-        // seriesOfThree.disabled = true;
+        seriesOfFour.checked = true;
     }
 
 
@@ -137,8 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else if (cardsChosen[0] === cardsChosen[1]) {
 
-            //   cards[optionOneId].setAttribute('src', 'image/OIP.jpg');
-            //   cards[optionTwoId].setAttribute('src', 'image/OIP.jpg');
             cards[optionOneId].removeEventListener('click', flipCard);
             cards[optionTwoId].removeEventListener('click', flipCard);
             cardsWon.push(cardsChosen);
@@ -205,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cards[optionTwoId].setAttribute('src', 'image/test.png');
 
         }
-       else if ((cardsChosen[0] === cardsChosen[1]) && (cardsChosen[1] === cardsChosen[2]) && (cardsChosen[2] === cardsChosen[3])) {
+        else if ((cardsChosen[0] === cardsChosen[1]) && (cardsChosen[1] === cardsChosen[2]) && (cardsChosen[2] === cardsChosen[3])) {
 
             //   cards[optionOneId].setAttribute('src', 'image/OIP.jpg');
             //   cards[optionTwoId].setAttribute('src', 'image/OIP.jpg');
@@ -238,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.setAttribute('src', duplicateImg[imgId].img);
         if (cardsChosen.length === 2 && seriesOfTwo.checked) {
             setTimeout(checkForMatch, 500)
-            return 
+            return
         }
         if (cardsChosen.length === 3 && seriesOfThree.checked) {
             setTimeout(checkForMatch3, 800)
@@ -257,15 +248,35 @@ document.addEventListener('DOMContentLoaded', () => {
         Array.from(imageElements).forEach((ele, index) => {
             ele.setAttribute('src', duplicateImg[index].img);
         })
+        // setTimeout(() => {
+        //     Array.from(imageElements).forEach((ele) => {
+        //         ele.setAttribute('src', 'image/test.png');
+        //     })
+        // }, 10000);
+
     }
+
+
+    let showBtn = document.querySelector('#show');
+    showBtn.addEventListener('click', showButton = () => {
+        checkSeries();
+        // createGrid();
+        shuffleCard();
+        showBtn.addEventListener('click', () => {
+            flipAllCard();
+        })
+
+    })
 
     newGame = document.querySelector('#newGame');
     let interval;
 
-    newGame = () => {
+    newGame.addEventListener('click', newGame = () => {
         checkSeries();
         createGrid();
-        shuffleCard();
+        // shuffleCard();
+        showBtn.disabled = true;
+
         resultDisplay.innerHTML = "0";
         cardsWon = [];
         const imageElements = document.getElementsByClassName('frontImg');
@@ -273,15 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ele.addEventListener('click', flipCard);
 
         })
-  
 
-        showButton = () => {
-            const showBtn = document.querySelector('#show');
-            showBtn.addEventListener('click', () => {
-                flipAllCard();
-                clearInterval(interval);
-            })
-        }
+
 
         let second = 60;
         let timer = document.querySelector("#timer");
@@ -294,15 +298,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Game Over');
                     flipAllCard();
                     showButton();
+                    // createGrid();
                     timer.value = 60;
                 }
             }, 100)
         };
         startTimer()
     }
+    )
     createGrid();
-
-
 })
 
 function help() {
