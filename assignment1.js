@@ -100,6 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let cardsChosen = [];
     let cardsChosenId = [];
     let cardsWon = [];
+    let interval;
+
     // create grid
 
     function createGrid() {
@@ -143,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDisplay.innerHTML = cardsWon.length;
         if (cardsWon.length === duplicateImg.length / 2) {
             resultDisplay.innerHTML = 'Congratulations! You found them all!';
+            clearInterval(interval);
         }
     }
 
@@ -179,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDisplay.innerHTML = cardsWon.length;
         if (cardsWon.length === duplicateImg.length / 3) {
             resultDisplay.innerHTML = 'Congratulations! You found them all!';
+            clearInterval(interval);
         }
     }
 
@@ -217,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDisplay.innerHTML = cardsWon.length;
         if (cardsWon.length === duplicateImg.length / 4) {
             resultDisplay.innerHTML = 'Congratulations! You found them all!';
+            clearInterval(interval);
         }
     }
 
@@ -260,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let showBtn = document.querySelector('#show');
     showBtn.addEventListener('click', showButton = () => {
         checkSeries();
-        // createGrid();
         shuffleCard();
         showBtn.addEventListener('click', () => {
             flipAllCard();
@@ -269,12 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     newGame = document.querySelector('#newGame');
-    let interval;
 
     newGame.addEventListener('click', newGame = () => {
-        checkSeries();
         createGrid();
-        // shuffleCard();
         showBtn.disabled = true;
 
         resultDisplay.innerHTML = "0";
@@ -301,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // createGrid();
                     timer.value = 60;
                 }
-            }, 100)
+            }, 1000)
         };
         startTimer()
     }
