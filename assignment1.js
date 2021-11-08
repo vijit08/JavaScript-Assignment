@@ -63,14 +63,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkedSeriesTwo = () => {
         seriesOfTwo.checked = true;
+        seriesOfTwo.disabled = true;
+        seriesOfThree.disabled = true;
+        seriesOfFour.disabled = true;
     }
 
     checkedSeriesThree = () => {
         seriesOfThree.checked = true;
+        seriesOfTwo.disabled = true;
+        seriesOfThree.disabled = true;
+        seriesOfFour.disabled = true;
     }
 
     checkedSeriesFour = () => {
         seriesOfFour.checked = true;
+        seriesOfTwo.disabled = true;
+        seriesOfThree.disabled = true;
+        seriesOfFour.disabled = true;
     }
 
 
