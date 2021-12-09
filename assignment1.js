@@ -262,11 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
         Array.from(imageElements).forEach((ele, index) => {
             ele.setAttribute('src', duplicateImg[index].img);
         })
-        // setTimeout(() => {
-        //     Array.from(imageElements).forEach((ele) => {
-        //         ele.setAttribute('src', 'image/test.png');
-        //     })
-        // }, 10000);
 
     }
 
@@ -281,17 +276,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
-    newGame = document.querySelector('#newGame');
+
+    newGame = document.querySelector('#new_game');
 
     newGame.addEventListener('click', newGame = () => {
         createGrid();
-        showBtn.disabled = true;
+
 
         resultDisplay.innerHTML = "0";
         cardsWon = [];
         const imageElements = document.getElementsByClassName('frontImg');
         Array.from(imageElements).forEach((ele) => {
             ele.addEventListener('click', flipCard);
+        showBtn.disabled = true;
+
 
         })
 
@@ -310,8 +308,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     showButton();
                     // createGrid();
                     timer.value = 60;
+                    // location.reload();
                 }
-            }, 1000)
+            }, 100)
         };
         startTimer()
     }
