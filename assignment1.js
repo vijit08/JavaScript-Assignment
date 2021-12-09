@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     timer.value = 60;
                     // location.reload();
                 }
-            }, 100)
+            }, 1000)
         };
         startTimer()
     }
